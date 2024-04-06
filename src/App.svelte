@@ -1,47 +1,57 @@
 <script>
-  import svelteLogo from './assets/svelte.svg'
-  import viteLogo from '/vite.svg'
-  import Counter from './lib/Counter.svelte'
+  export let finalBoard = [
+    [10, 10, 10, 14, 0, 0, 0, 0],
+    [0, 5, 5, 11, 21, 9, 3, 1],
+    [2, 6, 6, 14, 8, 3, 0, 0],
+    [7, 13, 0, 7, 9, 1, 0, 0],
+    [9, 10, 12, 0, 10, 3, 18, 5],
+    [12, 5, 8, 1, 0, 0, 6, 0],
+    [6, 20, 25, 15, 5, 0, 5, 13],
+    [0, 20, 30, 20, 5, 0, 5, 5],
+  ];
+
+  const getColor = (row, col) => {
+    const isWhite = (row + col) % 2 === 0;
+    return isWhite ? "#f0d9b5" : "#b58863";
+  };
 </script>
 
-<main>
-  <div>
-    <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-      <img src={viteLogo} class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank" rel="noreferrer">
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
-  </div>
-  <h1>Vite + Svelte</h1>
-
-  <div class="card">
-    <Counter />
-  </div>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!
-  </p>
-
-  <p class="read-the-docs">
-    Click on the Vite and Svelte logos to learn more
-  </p>
-</main>
+<div class="board">
+  {#each finalBoard as row, rowIndex}
+    <div class="row">
+      {#each row as value, colIndex}
+        <div
+          class="square"
+          style="background-color: {getColor(rowIndex, colIndex)};"
+        >
+          {value}
+        </div>
+      {/each}
+    </div>
+  {/each}
+</div>
 
 <style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
+  .board {
+    display: grid;
+    grid-template-rows: repeat(8, 1fr);
+    gap: 1px;
+    width: 400px;
+    height: 400px;
   }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
+
+  .row {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 1px;
   }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
+
+  .square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
   }
 </style>
