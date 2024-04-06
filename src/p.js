@@ -4,7 +4,7 @@ const pieceValues = {
     B: 3, // Bishop
     R: 5, // Rook
     Q: 9, // Queen
-    K: 0  // King (we won't be moving the king in this example)
+    K: 1  // King 
 };
 
 function parsePGN(pgn) {

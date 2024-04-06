@@ -59,6 +59,7 @@
         flex-direction: column;
         align-items: center;
         font-family: "Roboto", sans-serif;
+        margin-top: 2rem;
     }
 
     .board {
